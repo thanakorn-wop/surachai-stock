@@ -10,24 +10,24 @@ import { useHistory } from "react-router";
 import { v4 as uuidv4 } from 'uuid';
 import '../CSS/Return-borrow.css'
 
-import { MDBDataTable } from 'mdbreact';
+//import { MDBDataTable } from 'mdbreact';
 import { Table, Button } from "antd";
 import axios from "axios";
 function Popupeditborrowuser(props) {
-    let history = useHistory();
+    //let history = useHistory();
     const [startDate, setStartDate] = useState(new Date());
-    const [ctime, setCtime] = useState(new Date());
+    //const [ctime, setCtime] = useState(new Date());
     const [rebortime, setrebortime] = useState();
     const date = startDate.getDate() + '/' + startDate.getMonth() + '/' + startDate.getFullYear()
-    function UpdateTime() {
-        let time = new Date().toLocaleTimeString();
-        setCtime(time);
-    }
+    // function UpdateTime() {
+    //     let time = new Date().toLocaleTimeString();
+    //     setCtime(time);
+    // }
 
-    useEffect(() => {
-        const interval = setInterval(UpdateTime, 1000)
-        return () => clearInterval(interval);
-    }, []);
+    // useEffect(() => {
+    //     //const interval = setInterval(UpdateTime, 1000)
+    //     //return () => clearInterval(interval);
+    // }, []);
     // const [date, setDate] = useState(new Date());
     // const [selectdate,setselectdate] = useState();
     if (!props.show) {
