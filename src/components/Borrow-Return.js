@@ -587,7 +587,7 @@ function Borrow_Return() {
                         <option value="return">คืนแล้ว</option>
                         <option value="borrow">กำลังยืม</option>
                     </select>
-                    <select className="select-user" style={{ marginLeft: "5px" }} onChange={checkFullName} >
+                    <select className="select-user" style={{ marginLeft: "5px", width: "140px" }} onChange={checkFullName} >
 
                         {infouser.map(data => <option key={data.name}>{data.name} {data.lastname}</option>)}
                     </select>
