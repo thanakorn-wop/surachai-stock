@@ -1,3 +1,4 @@
+/* eslint-disable no-const-assign */
 import React, { useEffect, useState } from "react";
 import Menubar from "./Menubar";
 // import Calendar from 'react-calendar';
@@ -45,7 +46,7 @@ function Popupeditborrowuser(props) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: props.name, lastname: props.lastname, rebordate: date, rebortime: rebortime, devicename: props.devicename, amount: props.amount })
             }
-            fetch("http://localhost:8080/returnitem", data
+            fetch("/returnitem", data
 
             ).then(response => response.json())
                 .catch((err) => {
@@ -119,7 +120,7 @@ function PopUpAdduserborrowdevices(props) {
 
         }
 
-        fetch("http://localhost:8080/PopUpAdduserdevices", data
+        fetch("/PopUpAdduserdevices", data
 
         ).then(response => response.json())
 
@@ -161,7 +162,7 @@ function PopUpAdduserborrowdevices(props) {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ devicename: devicename, amount: amountdevice, date: date, name: name, lastname: lastname, rebortime: rebortime })
                 }
-                fetch("http://localhost:8080/PopUpAdduserborrowdevices", data
+                fetch("/PopUpAdduserborrowdevices", data
 
                 ).then(response => response.json())
 
@@ -282,7 +283,7 @@ function Propupdelete(props) {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name: props.devicename, amount: props.amount, status: props.status, bordate: props.datebor, rebordate: props.datereturn, id_user: props.id_user })
                 }
-                fetch("http://localhost:8080/deleteborrow-return", data
+                fetch("/deleteborrow-return", data
 
                 )
                     .catch((err) => {
@@ -341,6 +342,7 @@ function Borrow_Return() {
     const [selectstatus, setselectstatus] = useState();
     const [datafullname, setdatafullname] = useState();
 
+
     const token = localStorage.getItem("token");
     console.log("token", token);
     let login = true;
@@ -352,15 +354,15 @@ function Borrow_Return() {
 
     }
 
-    const modify = data.map(({ body, ...item }) => ({
+    let modify = data.map(({ body, ...item }) => ({
         ...item,
         // id:body,
         key: uuidv4(),
-        id: body,
+
     }));
-    const getdatafullname = (e) => {
-        setdatafullname(e.target.value);
-    }
+    // const getdatafullname = (e) => {
+    //     setdatafullname(e.target.value);
+    // }
 
     //console.log("check data modify = ",modify);
     function get(record) {
@@ -387,11 +389,14 @@ function Borrow_Return() {
     // {
     //    setdatafullname(props.target.value)
     // }
-    function searchuser(props) {
+    function searchuser() {
         // const newList = infouser.filter((item) => item.name === search);
         // setdata(newList);
-        console.log("check status = ", selectstatus);
-        console.log("check infouser = ", datafullname);
+        const listname = datafullname.split(' ');
+
+        console.log("check name = ", listname);
+        modify = data.filter((item) => item.name === listname[0] && item.lastname === listname[1]);
+        console.log("modify = ", modify)
     }
     // const [alldata,setalldata] = useState([{amount:"20"}]);
     const columns =
@@ -466,7 +471,7 @@ function Borrow_Return() {
 
 
         const getUserBorrowReturn = async () => {
-            const resp = await axios.get('http://localhost:8080/Page-borrow-return-user');
+            const resp = await axios.get('/Page-borrow-return-user');
             console.log("check ", resp);
             setdata(resp.data)
         }
@@ -478,7 +483,7 @@ function Borrow_Return() {
 
         //     }
 
-        //     await fetch("http://localhost:8080/Page-borrow-return-user", data
+        //     await fetch("/Page-borrow-return-user", data
 
         //     ).then(response => response.json())
 
@@ -499,7 +504,7 @@ function Borrow_Return() {
 
 
         const listUser = async () => {
-            const resp = await axios.get('http://localhost:8080/PopUpAdduserdevices');
+            const resp = await axios.get('/PopUpAdduserdevices');
             console.log("check ", resp);
             setinfouser(resp.data)
         }
@@ -513,7 +518,7 @@ function Borrow_Return() {
         //         headers: { 'Content-Type': 'application/json' },
 
         //     }
-        //     await fetch("http://localhost:8080/PopUpAdduserdevices",  user
+        //     await fetch("/PopUpAdduserdevices",  user
 
         //     ).then(response => response.json())
 
@@ -535,6 +540,10 @@ function Borrow_Return() {
     function checkStatus(e) {
         console.log("check e", e.target.value);
         setselectstatus(e.target.value);
+        // const listname = datafullname.split(' ');
+
+        // console.log("check name = ", listname);
+        //  modify = data.filter((item) => item.status === selectstatus);
 
     }
     function checkFullName(e) {
@@ -600,7 +609,7 @@ function Borrow_Return() {
                 <Propupdelete onClose={() => setdeletepop(false)} show={deletepop} name={name} lastname={lastname} devicename={devicename} amount={amount} status={status} datebor={datebor} datereturn={datereturn} id_user={id_user} />
 
 
-                <Table columns={columns} dataSource={modify} onChange />
+                <Table columns={columns} dataSource={modify} />
 
             </div>
 

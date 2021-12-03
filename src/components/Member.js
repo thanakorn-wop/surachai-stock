@@ -23,7 +23,7 @@ function PopupAddUser(props) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: name, lastname: lastname, nickname: nickname, phone: phone, position: position })
             }
-            fetch("http://localhost:8080/addmember", data
+            fetch("/addmember", data
 
             )
                 .catch((err) => {
@@ -33,7 +33,6 @@ function PopupAddUser(props) {
             window.location.reload(false);
 
         }
-
 
     }
     return (
@@ -109,7 +108,7 @@ function Editinfouser(props) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: name, lastname: lastname, nickname: nickname, phone: phone, position: position, id_member: props.id })
             }
-            fetch("http://localhost:8080/editinfouser", data
+            fetch("/editinfouser", data
 
             )
                 .catch((err) => {
@@ -183,7 +182,7 @@ function Propupdelete(props) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: props.name, lastname: props.lastname })
             }
-            fetch("http://localhost:8080/deletemember", data
+            fetch("/deletemember", data
 
             )
                 .catch((err) => {
@@ -252,7 +251,7 @@ function Member() {
 
         }
 
-        fetch("http://localhost:8080/showmember", data
+        fetch("/showmember", data
 
         ).then(response => response.json())
 

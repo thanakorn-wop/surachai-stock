@@ -6,118 +6,114 @@ import { Redirect, useHistory } from "react-router";
 
 function Login() {
     let history = useHistory();
-    
-    const [id,setid] = useState();
-    const [pass,setpass] = useState();
-    const [login,setlogin] = useState(false);
-    function setiduser(props)
-    {
+
+    const [id, setid] = useState();
+    const [pass, setpass] = useState();
+    const [login, setlogin] = useState(false);
+    function setiduser(props) {
         setid(props.target.value);
     }
-    function setpassworduser(props)
-    {
+    function setpassworduser(props) {
         setpass(props.target.value);
     }
-    const validatelogin =() =>{
-        console.log(id,pass);
-        if(id == null && pass == null)
-        {
+    const validatelogin = () => {
+        console.log(id, pass);
+        if (id == null && pass == null) {
             alert("Your username or password is Empty");
         }
-        else{
+        else {
             const data = {
-                method:"POST",
-                headers:{'Content-Type':'application/json'},
-                body:JSON.stringify({username:id,password:pass})
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username: id, password: pass })
             }
-            fetch("http://localhost:8080/login",data
-            
-                ).then(response => response.json())
-                
-                .then(resp =>{
-                    console.log("success",resp);
+            fetch("/login", data
+
+            ).then(response => response.json())
+
+                .then(resp => {
+                    console.log("success", resp);
                     console.log(resp.length);
-                    if(resp.length === 0)
-                    {
+                    if (resp.length === 0) {
                         alert("Your id don't register ");
                         // console.log("aaa");
                     }
-                    else{
+                    else {
                         // console.log("else")
                         setlogin(true);
-                        localStorage.setItem("token","qwasdsafafklsadqweasdkvmzxc")
+                        localStorage.setItem("token", "qwasdsafafklsadqweasdkvmzxc")
                         history.push("/dashbord");
-                        
+
                     }
-                   
+
                 })
-                .catch((err) =>{
+                .catch((err) => {
                     console.error("error");
                 })
         }
         // console.log("check = ",username);
         // console.log("check = ",password);
     }
-    
+
     // console.log(id,pass);
 
     return (
-        
-            <div style={{ display: "block",border:"solid black 5px", margin: "auto", width: "40%",height:"300px", textAlign: "center", marginTop: "5%" ,borderRadius: "25px"  }}>
-                <div style={{ paddingTop: "20px" }}>
-                    <h3 >บริษัทสุรชัย จำกัด</h3>
-                </div>
-                <div style={{ marginLeft: "10%",marginTop:"5%" }}>
-                    <table style={{  textAlign: "center", width: "80%", }}>
 
-                        <tbody>
-                            <tr>
-                                <td>
-                                </td>
-                                <td style={{ textAlign: "left" }}>
-                                    Username
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style={{ textAlign: "right", width: "15%" }}>
-                                    <img src={padlock} alt="logo" width="20px" />
+        <div style={{ display: "block", border: "solid black 5px", margin: "auto", width: "40%", height: "300px", textAlign: "center", marginTop: "5%", borderRadius: "25px" }}>
+            <div style={{ paddingTop: "20px" }}>
+                <h3 >บริษัทสุรชัย จำกัด</h3>
+            </div>
+            <div style={{ marginLeft: "10%", marginTop: "5%" }}>
+                <table style={{ textAlign: "center", width: "80%", }}>
 
-                                </td>
-                                <td style={{  textAlign: "left" }}>
-                                    <input type="text" id="ID" className="form-control" style={{ width: "100%", border: "solid gray 1px" }}  onChange={setiduser}/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
+                    <tbody>
+                        <tr>
+                            <td>
+                            </td>
+                            <td style={{ textAlign: "left" }}>
+                                Username
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style={{ textAlign: "right", width: "15%" }}>
+                                <img src={padlock} alt="logo" width="20px" />
 
-                                </td>
-                                <td style={{ textAlign: "left" }}>
-                                    Passwords
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style={{ textAlign: "right", width: "15%", }}>
-                                    <img src={key} alt="padlog" width="20px" /> &nbsp;
+                            </td>
+                            <td style={{ textAlign: "left" }}>
+                                <input type="text" id="ID" className="form-control" style={{ width: "100%", border: "solid gray 1px" }} onChange={setiduser} />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
 
-                                </td>
-                                <td style={{  textAlign: "left" }}>
-                                    <input type="password" id="password" className="form-control" style={{ width: "100%", border: "solid gray 1px" }} onChange={setpassworduser}/>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
+                            </td>
+                            <td style={{ textAlign: "left" }}>
+                                Passwords
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style={{ textAlign: "right", width: "15%", }}>
+                                <img src={key} alt="padlog" width="20px" /> &nbsp;
 
-                </div>
-                <div style={{marginTop:"20px"}}>
-                    <button type = "button" className = "btn btn-primary" style={{width:"50%"}} onClick={validatelogin}>Login</button>
-                    </div>
-
+                            </td>
+                            <td style={{ textAlign: "left" }}>
+                                <input type="password" id="password" className="form-control" style={{ width: "100%", border: "solid gray 1px" }} onChange={setpassworduser} />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
 
             </div>
+            <div style={{ marginTop: "20px" }}>
+                <button type="button" className="btn btn-primary" style={{ width: "50%" }} onClick={validatelogin}>Login</button>
+            </div>
 
-       
+
+
+        </div>
+
+
     )
 }
 export default Login;
