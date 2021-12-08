@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import key from "../images/Logos/key.png";
+//import padlock from "../../images/Logos/padlock.png";
 import padlock from "../images/Logos/padlock.png";
-import login from "../CSS/Login.css"
+import "../CSS/Login.css"
 import { Redirect, useHistory } from "react-router";
 
 function Login() {

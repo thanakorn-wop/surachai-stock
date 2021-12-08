@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Menubar from "./Menubar";
+
+import Menubar from "../components/Menubar"
 import { v4 as uuidv4 } from 'uuid';
 import Search from "antd/lib/transfer/search";
 import { Redirect, useHistory } from 'react-router'

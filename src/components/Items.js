@@ -1,16 +1,15 @@
 import React from "react";
-import Menubar from "./Menubar";
-import {  useHistory } from "react-router";
+
+import Menubar from "../../src/components/Menubar"
+import { useHistory } from "react-router";
 function Items() {
     let history = useHistory();
     const token = localStorage.getItem("token");
-    console.log("token",token);
+    console.log("token", token);
     let login = true;
-    if(token == null)
-    {
-       login = false;
-        if(!login === true)
-        {
+    if (token == null) {
+        login = false;
+        if (!login === true) {
             history.push("/");
         }
 
@@ -30,13 +29,13 @@ function Items() {
                 <div>
                     <button type="button" className="btn btn-primary" >ค้นหา</button>
                 </div>
-                <div style={{ marginTop:"10px"}}>
+                <div style={{ marginTop: "10px" }}>
                     <button type="button" className="btn btn-warning">เพิ่ม</button>
                 </div>
                 <table className="table table-bordered " >
                     <thead className="table-dark" style={{ textAlign: "center" }} >
                         <tr>
-                            <td style={{width:"70px"}}>ลำดับที่</td>
+                            <td style={{ width: "70px" }}>ลำดับที่</td>
                             <td>อุปกรณ์</td>
                             <td>จำนวน</td>
                             <td>สถานะ</td>
